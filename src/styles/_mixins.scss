@@ -8,6 +8,21 @@
   @return math.div($value, $base) + em;
 }
 
+@mixin container($max-width: rem(1110)) {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+
+  padding: 0 rem(15);
+
+  @include tablet {
+    padding: 0 rem(40);
+  }
+  @include phone {
+    padding: 0 rem(24);
+  }
+}
+
 @mixin title($fs: 16px, $lh: $fs, $fw: normal, $ls: 1, $tt: initial) {
   font-size: $fs;
   font-weight: $fw;

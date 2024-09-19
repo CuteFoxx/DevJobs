@@ -15,8 +15,6 @@ body {
 
   font-family: "Kumbh Sans";
   line-height: 1.625;
-
-  padding: rem(50);
 }
 
 input[type="checkbox"] {
@@ -64,41 +62,89 @@ body:has(.light) {
   background-color: $white;
 }
 
-.app {
-  &__theme-toggle-wrapper > &__theme-toggle {
-    $btn-width: rem(48);
-    $inner-circle-width: rem(14);
-    $circle-padding: rem(5);
+.header {
+  background: url("../assets/desktop/bg-pattern-header.svg") no-repeat;
+  background-size: cover;
+  border-radius: 0 0 0 rem(100);
 
-    position: relative;
-    min-width: $btn-width;
-    min-height: $btn-width / 2;
-    border-radius: rem(12);
+  @include tablet {
+    background: url("../assets/tablet/bg-pattern-header.svg") no-repeat;
+    background-size: cover;
+  }
+  @include phone {
+    background: url("../assets/mobile/bg-pattern-header.svg") no-repeat;
+    background-size: cover;
+  }
 
-    background-color: $white;
-    &::before {
+  &__container {
+    @include container;
+    min-height: rem(160);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: rem(16);
+    &:hover::before,
+    &:hover::after {
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+    &::before,
+    &::after {
       @include transition;
-      -webkit-transtition: left 0.3s ease-in-out, right 0.3s ease-in-out;
-      transition: left 0.3s ease-in-out, right 0.3s ease-in-out;
-
-      width: $inner-circle-width;
-      height: $inner-circle-width;
-      background-color: $primaryClr;
-      opacity: 1;
-      border-radius: 50%;
-      content: "";
-      position: absolute;
-      left: rem(5);
+      font-family: "Custom icons";
+      color: $white;
+      content: "\E802";
+      font-size: rem(12);
     }
-    &:checked {
-      background-color: $white;
+    &::after {
+      content: "\E801";
+    }
+    & > .header__theme-toggle {
+      @include transition;
+      $btn-width: rem(48);
+      $inner-circle-width: rem(14);
+      $circle-padding: rem(5);
 
-      &::before {
-        left: calc($btn-width - $inner-circle-width - $circle-padding);
+      position: relative;
+      min-width: $btn-width;
+      min-height: $btn-width / 2;
+      border-radius: rem(12);
+
+      background-color: $white;
+      &:hover {
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
       }
-    }
-    &:hover {
-      background-color: $white;
+      &:hover::before {
+        background-color: rgba($primaryClr, 0.7);
+      }
+      &::before {
+        @include transition;
+        // -webkit-transtition: left 0.3s ease-in-out, right 0.3s ease-in-out, color 0.3s ease-in-out;
+        // transition: left 0.3s ease-in-out, right 0.3s ease-in-out, color 0.3s ease-in-out;
+
+        width: $inner-circle-width;
+        height: $inner-circle-width;
+        background-color: $primaryClr;
+        opacity: 1;
+        border-radius: 50%;
+        content: "";
+        position: absolute;
+        left: rem(5);
+      }
+      &:checked {
+        background-color: $white;
+
+        &::before {
+          left: calc($btn-width - $inner-circle-width - $circle-padding);
+        }
+      }
+      &:hover {
+        background-color: $white;
+      }
     }
   }
 }

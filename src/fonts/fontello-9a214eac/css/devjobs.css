@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'devjobs';
-  src: url('../font/devjobs.eot?53015117');
-  src: url('../font/devjobs.eot?53015117#iefix') format('embedded-opentype'),
-       url('../font/devjobs.woff2?53015117') format('woff2'),
-       url('../font/devjobs.woff?53015117') format('woff'),
-       url('../font/devjobs.ttf?53015117') format('truetype'),
-       url('../font/devjobs.svg?53015117#devjobs') format('svg');
+  src: url('../font/devjobs.eot?29612788');
+  src: url('../font/devjobs.eot?29612788#iefix') format('embedded-opentype'),
+       url('../font/devjobs.woff2?29612788') format('woff2'),
+       url('../font/devjobs.woff?29612788') format('woff'),
+       url('../font/devjobs.ttf?29612788') format('truetype'),
+       url('../font/devjobs.svg?29612788#devjobs') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'devjobs';
-    src: url('../font/devjobs.svg?53015117#devjobs') format('svg');
+    src: url('../font/devjobs.svg?29612788#devjobs') format('svg');
   }
 }
 */
@@ -55,3 +55,5 @@
 }
 
 .icon-path-2-(stroke):before { content: '\e800'; } /* '' */
+.icon-moon:before { content: '\e801'; } /* '' */
+.icon-sun:before { content: '\e802'; } /* '' */

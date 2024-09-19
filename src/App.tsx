@@ -10,8 +10,15 @@ function App() {
 
   return (
     <div className={`${theme} app`}>
-      <ThemeSwitch />
-      <img src="./src/assets/logos/pomodoro.svg" alt="" />
+      <header className="header">
+        <div className="header__container">
+          <a href="/" className="header__logo">
+            <img src="./src/assets/desktop/logo.svg" alt="Logo" />
+          </a>
+          <ThemeSwitch />
+        </div>
+      </header>
+      <input type="checkbox" name="" id="" />
     </div>
   );
 }

@@ -44,9 +44,9 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <div className="app__theme-toggle-wrapper">
+    <div className="header__theme-toggle-wrapper">
       <input
-        className="app__theme-toggle"
+        className="header__theme-toggle"
         checked={theme === "dark"}
         type="checkbox"
         onChange={changeTheme}
