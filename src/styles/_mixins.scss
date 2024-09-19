@@ -1,0 +1,105 @@
+@use "variables" as *;
+@use "sass:math";
+
+@function rem($value, $base: 16) {
+  @return math.div($value, $base) + rem;
+}
+@function em($value, $base: 16) {
+  @return math.div($value, $base) + em;
+}
+
+@mixin title($fs: 16px, $lh: $fs, $fw: normal, $ls: 1, $tt: initial) {
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh/$fs;
+  letter-spacing: $ls;
+  text-transform: $tt;
+}
+@mixin regular {
+  font-size: rem(18);
+  line-height: 1.55;
+}
+@mixin h1 {
+  @include title(rem(28), rem(34));
+
+  @include phone {
+    @include title(rem(20));
+  }
+}
+@mixin h2 {
+  @include title(rem(24), rem(29));
+
+  @include phone {
+    @include title(rem(20));
+  }
+}
+@mixin h3 {
+  @include title(rem(20), rem(24));
+}
+@mixin h4 {
+  @include title(rem(14), rem(18));
+}
+@mixin regular {
+  font-size: rem(16);
+  line-height: #{rem(16) / rem(26)};
+}
+
+@mixin button {
+  @include transition;
+  @include regular();
+
+  padding: rem(16) rem(39);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  border: none;
+  color: $white;
+  background: $btn1-bg;
+  border-radius: rem(5);
+  font-weight: bold;
+
+  &:hover {
+    background: rgba($btn1-bg, 0.7);
+  }
+}
+
+@mixin button2 {
+  @include button;
+  color: $btn1-bg;
+  background: $btn2-bg;
+
+  &:hover {
+    background: rgba($btn1-bg, 0.4);
+  }
+}
+
+@mixin transition($time: 0.4s) {
+  transition: all $time ease;
+}
+
+@mixin max-width($max-width) {
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin phoneS {
+  @include max-width($phone) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @include max-width($tablet) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include max-width($pc) {
+    @content;
+  }
+}

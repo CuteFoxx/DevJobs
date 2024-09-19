@@ -1,0 +1,24 @@
+{
+  "name": "devjobs",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "d6268ba34011b398b3d94c79a61f9556",
+      "css": "path-2-(stroke)",
+      "code": 59392,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M1201.8 142.3L381 963 24.4 606.4 142.3 488.5 381 727.3 1083.9 24.4 1201.8 142.3Z",
+        "width": 1250
+      },
+      "search": [
+        "path-2-(stroke)"
+      ]
+    }
+  ]
+}

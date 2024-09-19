@@ -1,0 +1,104 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  @include transition;
+
+  font-family: "Kumbh Sans";
+  line-height: 1.625;
+
+  padding: rem(50);
+}
+
+input[type="checkbox"] {
+  @include transition;
+
+  background-color: $secondaryClr2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(24);
+  height: rem(24);
+
+  border-radius: rem(3);
+
+  &:hover {
+    background: $primaryClr2;
+  }
+  &::before {
+    @include transition;
+    opacity: 0;
+
+    font-family: "Custom icons";
+    height: fit-content;
+    color: $white;
+    content: "\E800";
+    font-size: rem(11);
+  }
+  &:checked {
+    background-color: $primaryClr;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+button {
+  @include button2;
+}
+
+body:has(.dark) {
+  background-color: $primaryClr4;
+}
+body:has(.light) {
+  background-color: $white;
+}
+
+.app {
+  &__theme-toggle-wrapper > &__theme-toggle {
+    $btn-width: rem(48);
+    $inner-circle-width: rem(14);
+    $circle-padding: rem(5);
+
+    position: relative;
+    min-width: $btn-width;
+    min-height: $btn-width / 2;
+    border-radius: rem(12);
+
+    background-color: $white;
+    &::before {
+      @include transition;
+      -webkit-transtition: left 0.3s ease-in-out, right 0.3s ease-in-out;
+      transition: left 0.3s ease-in-out, right 0.3s ease-in-out;
+
+      width: $inner-circle-width;
+      height: $inner-circle-width;
+      background-color: $primaryClr;
+      opacity: 1;
+      border-radius: 50%;
+      content: "";
+      position: absolute;
+      left: rem(5);
+    }
+    &:checked {
+      background-color: $white;
+
+      &::before {
+        left: calc($btn-width - $inner-circle-width - $circle-padding);
+      }
+    }
+    &:hover {
+      background-color: $white;
+    }
+  }
+}
