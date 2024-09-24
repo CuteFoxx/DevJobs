@@ -91,6 +91,40 @@
   }
 }
 
+@mixin checkbox {
+  @include transition;
+
+  background-color: $secondaryClr2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(24);
+  height: rem(24);
+
+  border-radius: rem(3);
+
+  &:hover {
+    background: $primaryClr2;
+  }
+  &::before {
+    @include transition;
+    opacity: 0;
+
+    font-family: "Custom icons";
+    height: fit-content;
+    color: $white;
+    content: "\E800";
+    font-size: rem(11);
+  }
+  &:checked {
+    background-color: $primaryClr;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
 @mixin transition($time: 0.4s) {
   transition: all $time ease;
 }

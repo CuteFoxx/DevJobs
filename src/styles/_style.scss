@@ -18,37 +18,7 @@ body {
 }
 
 input[type="checkbox"] {
-  @include transition;
-
-  background-color: $secondaryClr2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: rem(24);
-  height: rem(24);
-
-  border-radius: rem(3);
-
-  &:hover {
-    background: $primaryClr2;
-  }
-  &::before {
-    @include transition;
-    opacity: 0;
-
-    font-family: "Custom icons";
-    height: fit-content;
-    color: $white;
-    content: "\E800";
-    font-size: rem(11);
-  }
-  &:checked {
-    background-color: $primaryClr;
-
-    &::before {
-      opacity: 1;
-    }
-  }
+  @include checkbox;
 }
 
 button {
@@ -57,6 +27,7 @@ button {
 
 body:has(.dark) {
   background-color: $primaryClr4;
+  color: $white;
 }
 body:has(.light) {
   background-color: $white;
@@ -78,10 +49,11 @@ body:has(.light) {
 
   &__container {
     @include container;
+    padding-top: rem(45);
     min-height: rem(160);
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
   }
 
   &__theme-toggle-wrapper {
@@ -145,6 +117,98 @@ body:has(.light) {
       &:hover {
         background-color: $white;
       }
+    }
+  }
+}
+.main {
+  @include container;
+  .filters {
+    $input-height: rem(80);
+    $icon-size: rem(24);
+
+    @include transition;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background: $white;
+    min-height: $input-height;
+    width: 100%;
+    border-radius: rem(6);
+    overflow: hidden;
+    padding: rem(2) rem(16);
+    input {
+      @include transition;
+      border: none;
+      border-right: rem(1) solid $secondaryClr2;
+      &:focus {
+        outline: rem(1) solid rgba($primaryClr, 0.3);
+      }
+    }
+    .dark & input,
+    .dark & {
+      background: $primaryClr4;
+      color: $white;
+    }
+    .dark &__wrapper {
+      .filters__location,
+      .filters__name {
+        border-right: rem(1) solid rgba($secondaryClr2, 0.1);
+      }
+    }
+    .dark & input[type="submit"] {
+      @include button;
+    }
+    .dark & input[type="checkbox"] {
+      border: none;
+      @include checkbox;
+      background-color: rgba($secondaryClr2, 0.2);
+    }
+
+    &__wrapper {
+      @include transition;
+      position: relative;
+      flex: 1 1 auto;
+
+      &:has(.filters__name),
+      &:has(.filters__location) {
+        &::before {
+          top: 50%;
+          transform: translateY(-50%);
+          position: absolute;
+          font-family: "Custom icons";
+          color: $primaryClr;
+          content: "\E803";
+          font-size: $icon-size;
+        }
+      }
+      &:has(.filters__location) {
+        padding-left: rem(23);
+        &::before {
+          content: "\E804";
+        }
+      }
+    }
+    &__name {
+      height: 100%;
+      padding: 0 calc(#{rem(16)} + $icon-size);
+      width: 100%;
+      min-height: $input-height;
+    }
+    &__location {
+      padding: 0 $icon-size;
+      width: 100%;
+      min-height: $input-height;
+    }
+    label[for="full-time"] {
+      margin-right: rem(26);
+    }
+    &__full-time {
+      margin: 0 rem(16) 0 rem(32);
+    }
+    &__submit {
+      @include button;
+      height: rem(48);
     }
   }
 }

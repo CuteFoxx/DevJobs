@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme as setThemeRedux } from "../state/theme/themeSlice";
+import { setTheme as themeSetter } from "../state/theme/themeSlice";
+import { RootState } from "../state/store";
 
 const ThemeSwitch = () => {
-  const [theme, setTheme] = useState<string>("light");
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
+  const theme = useSelector((state: RootState) => state.themeReducer.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,18 +17,10 @@ const ThemeSwitch = () => {
         ? setTheme("dark")
         : setTheme("light");
     }
-    dispatch(setThemeRedux(theme));
   }, [theme]);
 
   const handleColorSchemeChange = () => {
-    if (mediaQuery.matches) {
-      setTheme("dark");
-      dispatch(setThemeRedux("dark"));
-    } else {
-      setTheme("light");
-      dispatch(setThemeRedux("light"));
-    }
-    console.log(1);
+    mediaQuery.matches ? setTheme("dark") : setTheme("light");
   };
 
   const changeTheme = (): void => {
@@ -39,8 +31,10 @@ const ThemeSwitch = () => {
       setTheme("dark");
       localStorage.setItem("theme", "dark");
     }
+  };
 
-    dispatch(setThemeRedux(theme));
+  const setTheme = (theme: string) => {
+    dispatch(themeSetter(theme));
   };
 
   return (
