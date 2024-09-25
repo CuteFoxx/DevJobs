@@ -7,11 +7,11 @@ import { setJobs } from "./state/jobs/jobsSlice";
 import { setFilteredJobs } from "./state/filteredJobs/filteredJobsSlice";
 import Filters from "./components/Filters";
 import JobsList from "./components/JobsList";
+import Header from "./components/Header";
 
 function App() {
   const { isLoading, error, data } = useFetch("./src/assets/data.json");
   const theme = useSelector((state: RootState) => state.themeReducer.value);
-  const jobs = useSelector((state: RootState) => state.jobsReducer.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,14 +23,7 @@ function App() {
 
   return (
     <div className={`${theme} app`}>
-      <header className="header">
-        <div className="header__container">
-          <a href="/" className="header__logo">
-            <img src="./src/assets/desktop/logo.svg" alt="Logo" />
-          </a>
-          <ThemeSwitch />
-        </div>
-      </header>
+      <Header />
       <main className="main">
         <Filters />
         <JobsList />

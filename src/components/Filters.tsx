@@ -17,10 +17,10 @@ const Filters = () => {
 
     data = jobs
       .filter((item) =>
-        item.company.toLowerCase().includes(query.toLowerCase())
+        item.company.toLowerCase().includes(query.toLowerCase().trim())
       )
       .filter((item) =>
-        item.location.toLowerCase().includes(location.toLowerCase())
+        item.location.toLowerCase().includes(location.toLowerCase().trim())
       )
       .filter((item) => {
         return contract ? item.contract === "Full Time" : item.contract;
