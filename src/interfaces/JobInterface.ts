@@ -1,4 +1,5 @@
 export interface JobInterface {
+  website: string;
   apply: string;
   company: string;
   contract: string;

@@ -23,7 +23,7 @@
   }
 }
 
-@mixin title($fs: 16px, $lh: $fs, $fw: normal, $ls: 1, $tt: initial) {
+@mixin title($fs: 16px, $lh: $fs, $fw: bold, $ls: 1, $tt: initial) {
   font-size: $fs;
   font-weight: $fw;
   line-height: $lh/$fs;
@@ -84,10 +84,19 @@
 @mixin button2 {
   @include button;
   color: $btn1-bg;
-  background: $btn2-bg;
+  background: rgba($primaryClr, 0.15);
 
   &:hover {
     background: rgba($btn1-bg, 0.4);
+  }
+
+  body:has(.dark) & {
+    background: rgba($white, 0.1);
+    color: $white;
+
+    &:hover {
+      background: rgba($white, 0.2);
+    }
   }
 }
 

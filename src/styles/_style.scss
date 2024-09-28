@@ -24,14 +24,20 @@ input[type="checkbox"] {
 button {
   @include button2;
 }
-
-body:has(.dark) {
-  background-color: $primaryClr4;
-  color: $white;
-}
-body:has(.light) {
-  background-color: $white;
-  background: $secondaryClr2;
+body {
+  &.fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+  &:has(.dark) {
+    background-color: $primaryClr4;
+    color: $white;
+  }
+  &:has(.light) {
+    background-color: $white;
+    background: $secondaryClr2;
+  }
 }
 
 .header {
@@ -131,6 +137,9 @@ body:has(.light) {
 .main {
   @include container;
   .filters {
+    position: relative;
+    z-index: 2;
+
     $input-height: rem(80);
     $icon-size: rem(24);
 
@@ -149,12 +158,18 @@ body:has(.light) {
     @include tablet {
       padding: 0 rem(16) 0 rem(24);
     }
+    @include phone {
+      overflow: visible;
+    }
     input {
       @include transition;
       border: none;
       border-right: rem(1) solid $secondaryClr2;
       &:focus {
         outline: rem(1) solid rgba($primaryClr, 0.3);
+      }
+      @include phone {
+        border: none;
       }
     }
     .dark & input,
@@ -166,19 +181,78 @@ body:has(.light) {
       .filters__location,
       .filters__name {
         border-right: rem(1) solid rgba($secondaryClr2, 0.1);
+
+        @include phone {
+          border: none;
+        }
       }
     }
     .dark & input[type="checkbox"] {
+      min-width: rem(24);
       border: none;
       @include checkbox;
       background-color: rgba($secondaryClr2, 0.2);
     }
+    &__group {
+      display: flex;
+      align-items: center;
+      flex: 1 1 auto;
+      @include phone {
+        display: none;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: start;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 50%);
+        z-index: 3;
+        width: rem(327);
+        min-height: rem(217);
+        background: $white;
+        padding-bottom: rem(24);
 
+        &.show {
+          display: flex;
+        }
+        body:has(.dark) & {
+          background: $primaryClr3;
+        }
+      }
+      &-bg {
+        display: none;
+        &.show {
+          display: block;
+          position: absolute;
+          z-index: 1;
+          content: "";
+          width: 200%;
+          left: -50%;
+          height: 200vh;
+          position: absolute;
+          top: -100vh;
+          background: rgba($primaryClr3, 0.7);
+          filter: blur(20px);
+        }
+      }
+    }
     &__wrapper {
       @include transition;
       position: relative;
       flex: 1 1 auto;
+      &:has(.filters__name) {
+        @include phone {
+          input {
+            padding: 0;
+          }
+        }
 
+        &::before {
+          @include tablet {
+            display: none;
+          }
+        }
+      }
       &:has(.filters__name),
       &:has(.filters__location) {
         &::before {
@@ -196,6 +270,25 @@ body:has(.light) {
         &::before {
           content: "\E804";
         }
+
+        @include phone {
+          padding-left: 0;
+          height: fit-content;
+          flex: unset;
+          padding-left: rem(47);
+          &::before {
+            left: rem(24);
+          }
+          input {
+            body:has(.dark) & {
+              background: $primaryClr3;
+            }
+          }
+        }
+      }
+
+      @include phone {
+        width: 100%;
       }
     }
     &__name {
@@ -212,10 +305,58 @@ body:has(.light) {
     label[for="full-time"] {
       margin-right: rem(26);
       min-width: fit-content;
+      @include tablet {
+        display: none;
+      }
+      &.label-mob {
+        display: none;
+        @include phone {
+          display: block;
+        }
+        @include tablet {
+          display: block;
+        }
+      }
+    }
+    .full-time__wrapper {
+      display: flex;
     }
     &__full-time {
       font-size: rem(16);
       margin: 0 rem(16) 0 rem(32);
+
+      @include phone {
+        margin-left: rem(24);
+      }
+    }
+
+    &__open {
+      background: none;
+      border: none;
+      &-wrapper {
+        display: none;
+      }
+      @include phone {
+        &-wrapper {
+          display: block;
+          position: relative;
+          body:has(.light) &::before {
+            color: $secondaryClr4;
+          }
+          &::before {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            font-size: rem(20);
+            font-family: "Custom icons";
+            height: fit-content;
+            color: $white;
+            font-weight: 900;
+            content: "\E805";
+          }
+        }
+      }
     }
     &__submit {
       @include button;
@@ -225,9 +366,50 @@ body:has(.light) {
         background: $primaryClr;
         border-right: none;
       }
-
+      &-mob {
+        display: none;
+      }
       @include tablet {
         padding: rem(16) rem(14);
+      }
+      @include phone {
+        margin: 0 auto;
+        min-width: 85%;
+        &-mob {
+          padding: 0;
+          width: rem(48);
+          height: rem(48);
+          display: block;
+          @include button;
+          background: $primaryClr;
+          &-wrapper {
+            position: relative;
+            &::before {
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              position: absolute;
+              font-size: rem(20);
+              font-family: "Custom icons";
+              height: fit-content;
+              color: $white;
+              font-weight: 900;
+              content: "\E803";
+            }
+          }
+          body:has(.light) & {
+            padding: 0;
+            font-size: 0;
+          }
+          body:has(.dark) & {
+            padding: 0;
+            width: rem(48);
+            height: rem(48);
+            font-size: 0;
+            background: $primaryClr;
+            border-right: none;
+          }
+        }
       }
     }
   }
@@ -311,6 +493,205 @@ body:has(.light) {
         height: 100%;
         font-size: 0;
       }
+    }
+  }
+}
+
+.job-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  &__inner {
+    @include container;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    max-width: rem(730);
+  }
+  &__company {
+    display: flex;
+    align-items: center;
+    background: $white;
+    overflow: hidden;
+    transform: translateY(-50%);
+    border-radius: rem(6);
+    body:has(.dark) & {
+      background: $primaryClr3;
+      border-radius: rem(6);
+    }
+    &-logo {
+      width: rem(140);
+      height: rem(140);
+      padding: rem(58) rem(30);
+      object-fit: contain;
+    }
+    &-wrapper {
+      padding-left: rem(40);
+      overflow: hidden;
+      flex: 1 1 auto;
+    }
+    &-name {
+      @include h2;
+      font-weight: bold;
+    }
+    &-website {
+      color: $secondaryClr4;
+      text-decoration: none;
+    }
+    &-btn {
+      @include button2;
+      width: rem(147);
+      padding: rem(16) rem(20);
+      text-decoration: none;
+      margin-right: rem(43);
+    }
+  }
+
+  &__info {
+    padding: rem(48);
+    margin-bottom: rem(80);
+    flex: 1 1 auto;
+    background: $white;
+    color: $secondaryClr4;
+    body:has(.dark) & {
+      color: $secondaryClr3;
+      background: $primaryClr3;
+      border-radius: rem(6);
+    }
+    h2 {
+      @include h3;
+      font-weight: bold;
+      margin-bottom: rem(28);
+      color: black;
+
+      body:has(.dark) & {
+        color: $white;
+      }
+    }
+    ul {
+      padding: rem(24) 0 rem(48) 0;
+      list-style-type: none;
+      li {
+        position: relative;
+        padding-left: rem(28);
+        display: block;
+        &::before {
+          left: 0;
+          position: absolute;
+          display: inline-block;
+          content: "•";
+          color: $primaryClr;
+        }
+      }
+    }
+    ol {
+      padding-top: rem(24);
+      counter-reset: item;
+      list-style-type: none;
+      li {
+        position: relative;
+        padding-left: rem(28);
+        display: block;
+        &::before {
+          left: 0;
+          position: absolute;
+          display: inline-block;
+          content: counter(item) "  ";
+          counter-increment: item;
+          color: $primaryClr;
+        }
+      }
+    }
+    &-wrapper {
+      @include container;
+      width: 100%;
+      max-width: rem(730);
+      padding: 0;
+
+      @include tablet {
+        padding: 0;
+      }
+      @include phone {
+        padding: 0;
+      }
+    }
+    &-header {
+      &-inner {
+        &:first-child {
+          justify-content: unset;
+          gap: rem(12);
+        }
+        display: flex;
+        justify-content: space-between;
+      }
+      &:last-child {
+        margin-bottom: rem(40);
+      }
+    }
+    &-contract {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: rem(12);
+      &::before {
+        display: inline-block;
+        content: "";
+        width: rem(4);
+        height: rem(4);
+        border-radius: 50%;
+        background: $secondaryClr4;
+      }
+    }
+    &-position {
+      @include h1;
+      color: black;
+
+      body:has(.dark) & {
+        color: $white;
+      }
+    }
+    &-apply {
+      @include button;
+      text-decoration: none;
+      height: rem(48);
+      padding: rem(13) rem(28);
+    }
+    &-location {
+      @include h4;
+      color: $primaryClr;
+      font-weight: bold;
+    }
+    &-content {
+      padding-bottom: rem(40);
+    }
+  }
+  &__footer {
+    width: 100vw;
+    padding: rem(22) 0;
+    background: $white;
+
+    body:has(.dark) & {
+      background: $primaryClr3;
+    }
+    &-wrapper {
+      @include container;
+      max-width: rem(730);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &-position {
+      @include h3;
+    }
+    &-company {
+      color: $secondaryClr4;
+    }
+    &-apply {
+      @include button;
+      text-decoration: none;
+      height: rem(48);
+      padding: rem(13) rem(28);
     }
   }
 }
