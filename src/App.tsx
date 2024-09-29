@@ -9,7 +9,7 @@ import JobsList from "./components/JobsList";
 import Header from "./components/Header";
 
 function App() {
-  const { isLoading, data } = useFetch("./src/assets/data.json");
+  const { isLoading, data } = useFetch("/data.json");
   const theme = useSelector((state: RootState) => state.themeReducer.value);
   const dispatch = useDispatch();
 
