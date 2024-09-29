@@ -10,7 +10,7 @@ import JobInfo from "./components/JobInfo";
 
 const JobPage = () => {
   const { id } = useParams();
-  const { isLoading, data } = useFetch("/src/assets/data.json");
+  const { isLoading, data } = useFetch("/data.json");
   const theme = useSelector((state: RootState) => state.themeReducer.value);
 
   const [job, setJob] = useState<JobInterface>(data);
