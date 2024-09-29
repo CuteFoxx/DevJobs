@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import ThemeSwitch from "./components/ThemeSwitch";
 import useFetch from "./hooks/useFetch";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./state/store";
@@ -10,7 +9,7 @@ import JobsList from "./components/JobsList";
 import Header from "./components/Header";
 
 function App() {
-  const { isLoading, error, data } = useFetch("./src/assets/data.json");
+  const { isLoading, data } = useFetch("./src/assets/data.json");
   const theme = useSelector((state: RootState) => state.themeReducer.value);
   const dispatch = useDispatch();
 

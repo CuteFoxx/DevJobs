@@ -62,6 +62,11 @@ body {
     justify-content: space-between;
     align-items: flex-start;
 
+    @media (min-width: rem(1440)) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     @include tablet {
       padding-top: rem(42);
     }
@@ -136,6 +141,10 @@ body {
 }
 .main {
   @include container;
+
+  @media (min-width: rem(1440)) {
+    padding: 0;
+  }
   .filters {
     position: relative;
     z-index: 2;
@@ -160,6 +169,7 @@ body {
     }
     @include phone {
       overflow: visible;
+      transform: translateY(-80%);
     }
     input {
       @include transition;
@@ -248,7 +258,7 @@ body {
         }
 
         &::before {
-          @include tablet {
+          @include phone {
             display: none;
           }
         }
@@ -320,11 +330,17 @@ body {
     }
     .full-time__wrapper {
       display: flex;
+      @include tablet {
+        padding: 0 rem(28) 0 rem(20);
+      }
     }
     &__full-time {
       font-size: rem(16);
       margin: 0 rem(16) 0 rem(32);
 
+      @include tablet {
+        margin: 0 rem(32) 0 rem(0);
+      }
       @include phone {
         margin-left: rem(24);
       }
@@ -414,17 +430,21 @@ body {
     }
   }
   .jobs {
-    padding: rem(105) 0;
+    padding: rem(60) 0 rem(105) 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: rem(30);
-    row-gap: rem(65);
+    row-gap: rem(60);
 
     @include tablet {
       grid-template-columns: repeat(2, 1fr);
+      padding: rem(30) 0 rem(61) 0;
+      column-gap: rem(15);
     }
     @include phone {
       grid-template-columns: repeat(1, 1fr);
+      padding: 0 0 rem(62) 0;
+      row-gap: rem(40);
     }
     .job-card {
       body:has(.dark) & {
@@ -474,7 +494,6 @@ body {
         font-size: rem(20);
         color: $primaryClr3;
         font-weight: bold;
-        margin: rem(16) 0;
       }
       &__company {
         color: $secondaryClr4;
@@ -501,20 +520,43 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  &__info-header-inner {
+    &:nth-child(2) .job-page__info-apply {
+      @include phone {
+        display: none;
+      }
+    }
+  }
   &__inner {
     @include container;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     max-width: rem(730);
+
+    @media (min-width: rem(1440)) {
+      padding: 0;
+    }
+    @include tablet {
+      padding: 0 rem(15);
+    }
+    @include phone {
+      padding: 0 rem(25);
+    }
   }
   &__company {
     display: flex;
     align-items: center;
     background: $white;
-    overflow: hidden;
-    transform: translateY(-50%);
+    transform: translateY(-30%);
     border-radius: rem(6);
+    @include phone {
+      transform: translateY(-20%);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: rem(32);
+    }
     body:has(.dark) & {
       background: $primaryClr3;
       border-radius: rem(6);
@@ -524,11 +566,24 @@ body {
       height: rem(140);
       padding: rem(58) rem(30);
       object-fit: contain;
+
+      @include phone {
+        width: rem(50);
+        height: rem(50);
+        padding: rem(20) rem(5);
+        transform: translateY(-50%);
+        border-radius: rem(15);
+      }
     }
     &-wrapper {
       padding-left: rem(40);
       overflow: hidden;
       flex: 1 1 auto;
+
+      @include phone {
+        padding-left: 0;
+        text-align: center;
+      }
     }
     &-name {
       @include h2;
@@ -544,19 +599,38 @@ body {
       padding: rem(16) rem(20);
       text-decoration: none;
       margin-right: rem(43);
+
+      @include phone {
+        margin-right: 0;
+        margin-top: rem(24);
+
+        body:has(.dark) & {
+          color: $primaryClr;
+          background: rgba($primaryClr, 0.2);
+        }
+      }
     }
   }
 
   &__info {
     padding: rem(48);
+    padding-top: rem(35);
     margin-bottom: rem(80);
     flex: 1 1 auto;
     background: $white;
     color: $secondaryClr4;
+
+    @include phone {
+      padding: rem(40) rem(25);
+    }
     body:has(.dark) & {
       color: $secondaryClr3;
       background: $primaryClr3;
       border-radius: rem(6);
+
+      @include phone {
+        padding: rem(40) rem(25);
+      }
     }
     h2 {
       @include h3;
@@ -655,6 +729,21 @@ body {
       text-decoration: none;
       height: rem(48);
       padding: rem(13) rem(28);
+
+      &-mob {
+        @include button;
+        text-align: center;
+        text-decoration: none;
+        height: rem(48);
+        padding: rem(13) rem(28);
+        display: none;
+
+        @include phone {
+          margin-top: rem(50);
+          margin-bottom: rem(32);
+          display: block;
+        }
+      }
     }
     &-location {
       @include h4;
@@ -680,18 +769,37 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      @media (min-width: rem(1440)) {
+        padding: 0;
+      }
+      @include tablet {
+        padding: 0 rem(15);
+      }
     }
     &-position {
       @include h3;
+
+      @include phone {
+        display: none;
+      }
     }
     &-company {
       color: $secondaryClr4;
+
+      @include phone {
+        display: none;
+      }
     }
     &-apply {
       @include button;
       text-decoration: none;
       height: rem(48);
       padding: rem(13) rem(28);
+
+      @include phone {
+        width: 100%;
+      }
     }
   }
 }

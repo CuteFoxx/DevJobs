@@ -30,6 +30,13 @@ const JobInfo = ({
             <div className={className + "-location"}>{job?.location}</div>
           </div>
         </div>
+        <a
+          className={className + "-apply-mob"}
+          href={job?.apply}
+          target="_blank"
+        >
+          Apply Now
+        </a>
       </div>
       <div className={className + "-content"}>{job?.description}</div>
       <div className={className + "-requirements"}>

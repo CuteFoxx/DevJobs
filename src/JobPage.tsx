@@ -1,17 +1,16 @@
 import { useParams } from "react-router-dom";
 import Header from "./components/Header";
 import { RootState } from "./state/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useFetch from "./hooks/useFetch";
-import { setJobs } from "./state/jobs/jobsSlice";
 import { JobInterface } from "./interfaces/JobInterface";
 import CompanyInfo from "./components/CompanyInfo";
 import JobInfo from "./components/JobInfo";
 
 const JobPage = () => {
   const { id } = useParams();
-  const { isLoading, error, data } = useFetch("/src/assets/data.json");
+  const { isLoading, data } = useFetch("/src/assets/data.json");
   const theme = useSelector((state: RootState) => state.themeReducer.value);
 
   const [job, setJob] = useState<JobInterface>(data);
